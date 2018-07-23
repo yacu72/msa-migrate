@@ -1,0 +1,19 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file. 
+ */
+ .list-user-table .toggle-row {
+ 	display: none;
+ }
+.paging-input label {
+	display: inline-block;
+	padding-right: 5px;
+}
+.paging-input input {
+	width: 25px;
+	font-size: 16px;
+	display: inline-block;
+	line-height: 0.5em;
+	height: 1.5em;
+	padding: 0 5px 0 7px;
+}
