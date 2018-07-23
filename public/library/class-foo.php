@@ -144,15 +144,15 @@ if ( ! class_exists( 'Msa_Migrate_Users' ) ):
 					$wpdb->update($wpdb->users, array('user_registered' => $registered , 'old_uid' => $user->uid), array('ID' => $new_user_id));
 
 					// Migrating Meta Data
-					update_user_meta($user_id, 'first_name', $user->firstname);
-					update_user_meta($user_id, 'last_name', $user->surname);
+					update_user_meta($new_user_id, 'first_name', $user->firstname);
+					update_user_meta($new_user_id, 'last_name', $user->surname);
 
-					update_user_meta($user_id, 'last_ip', $user->IP);
+					update_user_meta($new_user_id, 'last_ip', $user->IP);
 
-					update_user_meta($user_id, 'last_activity', $last_activity);
+					update_user_meta($new_user_id, 'last_activity', $last_activity);
 
           //add last activity data to bo table
-          bp_update_user_last_activity( $user_id, $last_activity );
+          bp_update_user_last_activity( $new_user_id, $last_activity );
 
 
 
