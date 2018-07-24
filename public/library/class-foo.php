@@ -154,20 +154,6 @@ if ( ! class_exists( 'Msa_Migrate_Users' ) ):
           //add last activity data to bo table
           bp_update_user_last_activity( $new_user_id, $last_activity );
 
-
-
-	    		// variable passed to table constructor
-	    		$data[$user->uid] = array(
-	    			'phase' => $user->phase,
-	    			'id'   => $user->uid,
-	    			'name' => $user->firstname .' '. $user->surname,
-	    			'email' => $user->mail,
-	    			'created' => date('Y-m-d H:i:s', $user->created ),
-	    			'last_login' => date('Y-m-d H:i:s', $user->login ),
-	    			'access' => date('Y-m-d H:i:s', $user->access ),
-	    			'ip'     => $user->IP,
-	    		);
-
           return $new_user_id;
 
 	    	} else {

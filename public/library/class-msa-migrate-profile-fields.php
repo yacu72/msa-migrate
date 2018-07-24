@@ -40,7 +40,7 @@ if ( ! class_exists( 'Msa_Migrate_Profile_Fields' ) ) :
 				if ($data->type == 'selectbox') {
 					//$output .= $data->NAME .': '. $data->value .'<br>';
 
-					$options = msa_select_options( $data->ID );
+					$options = $this->msa_select_options( $data->ID );
 
 					if ( in_array($data->value, $options) ) {
 						$output .= $data->NAME .': '. $data->value .'<br>';
@@ -91,6 +91,22 @@ if ( ! class_exists( 'Msa_Migrate_Profile_Fields' ) ) :
 
     }	
 
+		public function msa_select_options( $select_id ) {
+			global $wpdb;
+
+			$sql = "SELECT  xbpf.name
+		FROM wp_bp_xprofile_fields xbpf
+		WHERE parent_id = %d ";
+
+			$data = $wpdb->get_results($wpdb->prepare($sql, $select_id));
+
+			foreach ($data as $key => $option) {
+				$options[] = $option->name;
+			} 
+
+			return $options;
+		}    
+
     /**
      * Migrate Profile data from d5db to wpdb.
      */
@@ -122,7 +138,7 @@ if ( ! class_exists( 'Msa_Migrate_Profile_Fields' ) ) :
 					// country and Citizenship fields
 					if ($data->ID == 5 || $data->ID == 399) {
 
-						$options = msa_select_options( $data->ID );
+						$options = $this->msa_select_options( $data->ID );
 
 						if ( in_array($data->value, $options) ) {
 							$result = xprofile_set_field_data($data->ID, $uid, $data->value, $is_required);
